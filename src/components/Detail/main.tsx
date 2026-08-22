@@ -2,10 +2,23 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import classes from "./ArticleDetail.module.css";
 
+type Post = {
+  id: string;
+  title: string;
+  content: string;
+  thumbnaiUrl: string;
+  createdAt: string;
+  categories: string[];
+};
+
+type ApiResponse = {
+  post: Post;
+};
+
 export const Detail = () => {
-  const { id } = useParams();
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { id } = useParams<{ id: string }>();
+  const [post, setPost] = useState<Post | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetcher = async () => {
@@ -14,7 +27,7 @@ export const Detail = () => {
         const res = await fetch(
           `https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts/${id}`
         );
-        const data = await res.json();
+        const data : ApiResponse = await res.json();
 
         setPost(data.post);
       } catch (error) {

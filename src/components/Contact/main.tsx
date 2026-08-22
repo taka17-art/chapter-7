@@ -1,15 +1,21 @@
 import { useForm } from "react-hook-form";
 import classes from "./Contact.module.css";
 
+type FormInputs = {
+  name: string;
+  email: string;
+  message: string;
+};
+
 export const Contact = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm();
+  } = useForm<FormInputs>();
 
-  const onSubmit = async (data) => {
+  const onSubmit : SubmitHandler<FormInputs> = async (data) => {
     try {
       const res = await fetch("https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/contacts",
         {
