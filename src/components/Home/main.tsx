@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Home.module.css";
+import type { Post } from "../../types/Post";
+
+type ApiResponse = {
+  posts: Post[];
+};
 
 export const Home = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -13,7 +18,7 @@ export const Home = () => {
         const res = await fetch(
           "https://1hmfpsvto6.execute-api.ap-northeast-1.amazonaws.com/dev/posts"
         );
-        const data = await res.json();
+        const data : ApiResponse = await res.json();
 
         setPosts(data.posts);
       } catch (error) {
@@ -33,7 +38,7 @@ export const Home = () => {
     return <div>記事が見つかりませんでした。</div>;
   }
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString : string) : string => {
     if (!dateString) return "";
     const parts = dateString.split(/[-/T]/);
     if (parts.length >= 3) {
