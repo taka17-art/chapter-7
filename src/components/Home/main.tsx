@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Home.module.css";
-
-type Post = {
-  id: String;
-  title: string;
-  content: string;
-  thumbnailUrl: string;
-  createdAt: string;
-  categories: string[];
-};
+import type { Post } from "../../types/Post";
 
 type ApiResponse = {
   posts: Post[];

@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import classes from "./ArticleDetail.module.css";
-
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  thumbnaiUrl: string;
-  createdAt: string;
-  categories: string[];
-};
+import type { Post } from "../../types/Post";
 
 type ApiResponse = {
   post: Post;
